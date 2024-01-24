@@ -7,4 +7,5 @@ set(CMAKE_C_STANDARD 17)
 add_executable(design_of_algorithms main.c
         src/Q1/binary_tree.h
         src/Q1/graph.h
-        src/Q1/Q1.c)
+        src/Q3/sort.h
+        src/Q3/substring.h)

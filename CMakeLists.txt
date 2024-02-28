@@ -19,9 +19,7 @@ add_executable(design_of_algorithms main.c
         src/utils/queue.h
         src/utils/stack.c
         src/utils/queue.c
-        src/Q6/merge_sort.h
         src/Q2/fibonacci.h
-        src/Q6/quick_sort.h
         src/lookup/sort.h
         src/lookup/sort.c
         src/utils/array.h

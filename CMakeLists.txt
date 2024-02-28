@@ -8,4 +8,23 @@ add_executable(design_of_algorithms main.c
         src/Q1/binary_tree.h
         src/Q1/graph.h
         src/Q3/sort.h
-        src/Q3/substring.h)
+        src/Q3/substring.h
+        src/Q2/gcd.h
+        src/Q3/matrix.h
+        src/Q3/partition.h
+        src/Q4/travelling_salesman.h
+        src/Q4/assignment.h
+        src/Q5/topological_sort.h
+        src/utils/stack.h
+        src/utils/queue.h
+        src/utils/stack.c
+        src/utils/queue.c
+        src/Q6/merge_sort.h
+        src/Q2/fibonacci.h
+        src/Q6/quick_sort.h
+        src/lookup/sort.h
+        src/lookup/sort.c
+        src/utils/array.h
+        src/utils/binary_tree.h
+        src/utils/binary_tree.c
+        src/Q5/tree_diameter.h)

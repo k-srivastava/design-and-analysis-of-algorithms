@@ -21,7 +21,7 @@ void merge_sorted_subarrays(const size_t left, const size_t middle, const size_t
     while (j < right_length) { array[k++] = right_subarray[j++]; }
 }
 
-void merge_sort_helper(size_t left, size_t right, int array[right - left + 1])
+void merge_sort_helper(const size_t left, const size_t right, int array[right - left + 1])
 {
     if (left < right)
     {
@@ -61,6 +61,22 @@ void quick_sort_helper(const int low, const int high, int array[high - low + 1])
     const size_t pivot_idx = partition(low, high, array);
     quick_sort_helper(low, pivot_idx - 1, array);
     quick_sort_helper(pivot_idx + 1, high, array);
+}
+
+void heapify(const size_t length, int heap[length], const size_t idx)
+{
+    size_t maximum_idx = idx;
+    const size_t left_idx = idx * 2 + 1;
+    const size_t right_idx = idx * 2 + 2;
+
+    if (left_idx < length && heap[left_idx] > heap[maximum_idx]) { maximum_idx = left_idx; }
+    if (right_idx < length && heap[right_idx] > heap[maximum_idx]) { maximum_idx = right_idx; }
+
+    if (maximum_idx != idx)
+    {
+        SWAP(heap[idx], heap[maximum_idx], int);
+        heapify(length, heap, maximum_idx);
+    }
 }
 
 void bubble_sort(const size_t length, int array[length])
@@ -116,3 +132,14 @@ void selection_sort(const size_t length, int array[length])
 void merge_sort(const size_t length, int array[length]) { merge_sort_helper(0, length - 1, array); }
 
 void quick_sort(const size_t length, int array[length]) { quick_sort_helper(0, length - 1, array); }
+
+void heap_sort(const size_t length, int array[length])
+{
+    for (int i = length; i >= 0; i--) { heapify(length, array, i); }
+
+    for (int i = length - 1; i >= 0; i--)
+    {
+        SWAP(array[0], array[i], int);
+        heapify(i, array, 0);
+    }
+}

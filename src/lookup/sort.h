@@ -26,4 +26,6 @@ void merge_sort(size_t length, int array[length]);
 
 void quick_sort(size_t length, int array[length]);
 
+void heap_sort(size_t length, int array[length]);
+
 #endif //SORT_H

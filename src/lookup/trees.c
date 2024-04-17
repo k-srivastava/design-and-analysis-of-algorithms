@@ -166,7 +166,7 @@ bt_node_t* insert_in_avl_tree(bt_node_t* root, const int data)
     if (balance_factor > 1 && root->left->data < data)
     {
         root->left = rotate_left(root->left);
-        return rotate_left(root);
+        return rotate_right(root);
     }
 
     if (balance_factor < -1 && root->right->data > data)

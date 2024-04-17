@@ -25,4 +25,20 @@ add_executable(design_of_algorithms main.c
         src/utils/array.h
         src/utils/binary_tree.h
         src/utils/binary_tree.c
-        src/Q5/tree_diameter.h)
+        src/Q5/tree_diameter.h
+        src/utils/utils.c
+        src/utils/utils.h
+        src/utils/avl_tree.c
+        src/utils/avl_tree.h
+        src/Q4/knapsack.h
+        src/lookup/graphs.c
+        src/lookup/graphs.h
+        src/lookup/string_matching.c
+        src/lookup/string_matching.h
+        src/lookup/trees.c
+        src/lookup/trees.h
+        src/lookup/combinatorics.c
+        src/lookup/combinatorics.h
+        src/lookup/utils.h
+        src/lookup/utils.c
+)

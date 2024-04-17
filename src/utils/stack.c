@@ -26,7 +26,7 @@ void free_stack(stack_t stack)
     stack.data = NULL;
 }
 
-bool push_to_stack(stack_t* stack, int data)
+bool push_to_stack(stack_t* stack, const int data)
 {
     if (stack->size == stack->capacity)
     {

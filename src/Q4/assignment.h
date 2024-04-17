@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../lookup/sort.h"
+#include "../lookup/utils.h"
 
 int* generate_range(const size_t lower_bound, const size_t upper_bound)
 {

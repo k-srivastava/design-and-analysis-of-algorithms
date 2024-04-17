@@ -1,5 +1,25 @@
 #include "graphs.h"
 
+#include <stdbool.h>
+#include <stdlib.h>
+
+size_t min_distance_idx(const size_t vertices, int distances[vertices], bool included[vertices])
+{
+    int min = EDGE_MAX;
+    size_t min_idx = 0;
+
+    for (size_t i = 0; i < vertices; i++)
+    {
+        if (!included[i] && distances[i] <= min)
+        {
+            min = distances[i];
+            min_idx = i;
+        }
+    }
+
+    return min_idx;
+}
+
 void display_adjacency_matrix(FILE* stream, const size_t vertices, int adjacency_matrix[vertices][vertices])
 {
     fprintf(stream, "{\n");
@@ -36,4 +56,51 @@ void warshalls_algorithm(const size_t vertices, int distance_matrix[vertices][ve
             }
         }
     }
+}
+
+int* djiktras_algorithm(
+    const size_t vertices, const size_t start_vertex_idx,
+    int distance_matrix[vertices][vertices]
+)
+{
+    int* distances = malloc(sizeof(int) * vertices);
+    bool* included = malloc(sizeof(bool) * vertices);
+
+    if (distances == NULL)
+    {
+        fprintf(stderr, "Could not allocate enough memory for distance array of length %zu.\n", vertices);
+        exit(1);
+    }
+
+    if (included == NULL)
+    {
+        fprintf(stderr, "Could not allocate enough memory for boolean array of length %zu.\n", vertices);
+        exit(1);
+    }
+
+    for (size_t i = 0; i < vertices; i++)
+    {
+        distances[i] = EDGE_MAX;
+        included[i] = false;
+    }
+
+    distances[start_vertex_idx] = 0;
+
+    for (size_t i = 0; i < vertices - 1; i++)
+    {
+        const size_t min_idx = min_distance_idx(vertices, distances, included);
+        included[min_idx] = true;
+
+        for (size_t j = 0; j < vertices; j++)
+        {
+            const int new_distance = distances[min_idx] + distance_matrix[min_idx][j];
+            if (!included[j] && distance_matrix[min_idx][j] && distances[min_idx] != EDGE_MAX && new_distance <
+                distances[j])
+                distances[j] = new_distance;
+        }
+    }
+
+    free(included);
+
+    return distances;
 }

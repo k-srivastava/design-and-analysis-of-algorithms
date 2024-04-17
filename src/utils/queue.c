@@ -30,9 +30,7 @@ bool insert_into_queue(queue_t* queue, int data)
 {
     if (queue->size == queue->capacity)
     {
-        fprintf(stderr, "Queue of capacity %zu is full.\n");
+        fprintf(stderr, "Queue of capacity %zu is full.\n", queue->capacity);
         return false;
     }
-
-
 }

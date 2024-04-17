@@ -1,4 +1,5 @@
 #include "sort.h"
+#include "utils.h"
 
 void merge_sorted_subarrays(const size_t left, const size_t middle, const size_t right, int array[right - left + 1])
 {

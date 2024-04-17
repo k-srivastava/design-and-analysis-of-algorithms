@@ -70,8 +70,11 @@ void heapify(const size_t length, int heap[length], const size_t idx)
     const size_t left_idx = idx * 2 + 1;
     const size_t right_idx = idx * 2 + 2;
 
-    if (left_idx < length && heap[left_idx] > heap[maximum_idx]) { maximum_idx = left_idx; }
-    if (right_idx < length && heap[right_idx] > heap[maximum_idx]) { maximum_idx = right_idx; }
+    if (left_idx < length && heap[left_idx] > heap[maximum_idx])
+        maximum_idx = left_idx;
+
+    if (right_idx < length && heap[right_idx] > heap[maximum_idx])
+        maximum_idx = right_idx;
 
     if (maximum_idx != idx)
     {

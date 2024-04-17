@@ -20,6 +20,23 @@ size_t min_distance_idx(const size_t vertices, int distances[vertices], bool inc
     return min_idx;
 }
 
+size_t min_key_idx(const size_t vertices, int keys[vertices], bool included[vertices])
+{
+    int min = INT_MAX;
+    size_t min_idx = 0;
+
+    for (size_t i = 0; i < vertices; i++)
+    {
+        if (!included[i] && keys[i] < min)
+        {
+            min = keys[i];
+            min_idx = i;
+        }
+    }
+
+    return min_idx;
+}
+
 void display_adjacency_matrix(FILE* stream, const size_t vertices, int adjacency_matrix[vertices][vertices])
 {
     fprintf(stream, "{\n");
@@ -42,6 +59,13 @@ void display_adjacency_matrix(FILE* stream, const size_t vertices, int adjacency
     fprintf(stream, "}\n");
 }
 
+void display_min_spanning_tree(const size_t vertices, int parents[vertices], int distance_matrix[vertices][vertices])
+{
+    printf("Edge\tWeight\n");
+    for (size_t i = 1; i < vertices; i++)
+        printf("%d - %zu\t%d\n", parents[i], i, distance_matrix[i][parents[i]]);
+}
+
 void warshalls_algorithm(const size_t vertices, int distance_matrix[vertices][vertices])
 {
     for (size_t k = 0; k < vertices; k++)
@@ -56,6 +80,62 @@ void warshalls_algorithm(const size_t vertices, int distance_matrix[vertices][ve
             }
         }
     }
+}
+
+void prims_algorithm(size_t vertices, int distance_matrix[vertices][vertices])
+{
+    int* parents = malloc(sizeof(int) * vertices);
+    int* keys = malloc(sizeof(int) * vertices);
+    bool* included = malloc(sizeof(bool) * vertices);
+
+    if (parents == NULL)
+    {
+        fprintf(stderr, "Could not allocate enough memory for integer array of length %zu.\n", vertices);
+        exit(1);
+    }
+
+    if (keys == NULL)
+    {
+        fprintf(stderr, "Could not allocate enough memory for integer array of length %zu.\n", vertices);
+        exit(1);
+    }
+
+    if (included == NULL)
+    {
+        fprintf(stderr, "Could not allocate enough memory for boolean array of length %zu.\n", vertices);
+        exit(1);
+    }
+
+    for (size_t i = 0; i < vertices; i++)
+    {
+        keys[i] = INT_MAX;
+        included[i] = false;
+    }
+
+    keys[0] = 0;
+    parents[0] = -1;
+
+    for (size_t count = 0; count < vertices - 1; count++)
+    {
+        const int idx = min_key_idx(vertices, keys, included);
+        included[idx] = true;
+
+        for (size_t vertex = 0; vertex < vertices; vertex++)
+        {
+            const int current = distance_matrix[idx][vertex];
+            if (current && !included[vertex] && current < keys[vertex])
+            {
+                parents[vertex] = idx;
+                keys[vertex] = current;
+            }
+        }
+    }
+
+    display_min_spanning_tree(vertices, parents, distance_matrix);
+
+    free(included);
+    free(keys);
+    free(parents);
 }
 
 int* djiktras_algorithm(

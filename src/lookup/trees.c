@@ -25,7 +25,7 @@ bt_node_t* rotate_right(bt_node_t* root)
     return root_left;
 }
 
-bt_node_t* init_bt_node(int data, bt_node_t* left, bt_node_t* right)
+bt_node_t* init_bt_node(const int data, bt_node_t* left, bt_node_t* right)
 {
     bt_node_t* root = malloc(sizeof(bt_node_t));
 

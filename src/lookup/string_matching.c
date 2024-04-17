@@ -7,7 +7,7 @@
 
 #include "utils.h"
 
-int* generate_shift_table(const char* string, size_t shift_table_length)
+int* generate_shift_table(const char* string, const size_t shift_table_length)
 {
     int* shift_table = malloc(sizeof(int) * shift_table_length);
 

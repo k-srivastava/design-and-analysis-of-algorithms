@@ -14,7 +14,7 @@ size_t travelling_salesman_brute_force(size_t cities, size_t distance_matrix[cit
 
 void warshalls_algorithm(size_t vertices, int distance_matrix[vertices][vertices]);
 
-// TODO: Add Kruskal's algorithm.
+void prims_algorithm(size_t vertices, int distance_matrix[vertices][vertices]);
 
 int* djiktras_algorithm(size_t vertices, size_t start_vertex_idx, int distance_matrix[vertices][vertices]);
 
